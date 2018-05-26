@@ -1,14 +1,31 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Tic-Tac-Toe</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div class="gameStatus" >
+      {{gameState}}
+  </div>
+
+  <div ion-grid class="board">
+    <div ion-row *ngFor="let row of [0,1,2]">
+      <div ion-col col-4 class="cell"
+      		[class.top]="row != 0"
+      		[class.bottom]="row != 2"
+      		[class.left]="col != 0"
+      		[class.right]="col != 2"
+            *ngFor="let col of [0,1,2]"
+            (click)="makeMove(col+row*3)"
+            >
+            <div class="text">
+            	{{(cells? cells[col+row*3] : "")}}
+            </div>
+      </div>
+    </div>
+  </div>
+  
+  <button class="restart" (click)="restartGame()">New Game</button>
+  <button class="exit" (click)="exitApp()">Exit</button>
 </ion-content>
